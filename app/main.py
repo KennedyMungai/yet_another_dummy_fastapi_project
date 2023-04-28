@@ -1,5 +1,5 @@
 """The entrypoint for the FastAPI application"""
-from fastapi import FastAPI, status
+from fastapi import FastAPI, status, Response
 from pydantic import BaseModel
 
 
@@ -47,3 +47,22 @@ async def get_post(_id: int) -> dict[int, Post]:
     """
 
     return posts[_id]
+
+
+@app.put('/posts/{id: int}')
+async def update_or_create_post(_id: int, _post: Post, _response: Response):
+    """The createing ir updateing posts endpoint
+
+    Args:
+        _id (int): The id of the post
+        _post (Post): The post
+        _response (Response): The response in a predetermined template
+
+    Returns:
+        Post: A post
+    """
+    if _id not in posts:
+        response.status_code = status.HTTP_201_CREATED
+
+    posts[id] = post
+    return posts[id]

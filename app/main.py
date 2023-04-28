@@ -4,7 +4,7 @@ from fastapi import FastAPI
 app = FastAPI()
 
 
-@app.get('/')
+@app.get('/',  tags=['Root'])
 async def root() -> dict[str, str]:
     """The root endpoint for the application
 

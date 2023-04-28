@@ -150,7 +150,13 @@ async def upload_file_alternative(file: UploadFile = File(...)):
     return {'file_name': file.filename, 'content_type': file.content_type}
 
 
-@app.post('upload-many-files', tags=['File Upload'], name='Multiple Uploads', description='An endpoint to upload a bunch of files', status_code=status.HTTP_201_CREATED)
+@app.post(
+    'upload-many-files', 
+    tags=['File Upload'], 
+    name='Multiple Uploads', 
+    description='An endpoint to upload a bunch of files', 
+    status_code=status.HTTP_201_CREATED
+    )
 async def upload_many_files(_files: List[UploadFile] = File(...)):
     """An endpoint to upload a bunch of files to the database
 

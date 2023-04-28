@@ -97,7 +97,7 @@ async def create_user(_user: User) -> User:
 async def create_user_form(
     _name: str = Form(...),
     _age: int = Form(...)
-) -> dict[str: str]:
+):
     """A simple API endpoint for creating users using form data
 
     Args:

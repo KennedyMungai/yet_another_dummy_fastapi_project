@@ -1,5 +1,5 @@
 """The entry point for the application."""
-from fastapi import FastAPI, Path, status, Form
+from fastapi import FastAPI, Path, status, Form, File
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -108,3 +108,16 @@ async def create_user_form(
         Dict: A dictionary containing the user's name and age
     """
     return {'name': _name, 'age': _age}
+
+
+@app.post('/files')
+async def upload_file(file: bytes = File(...)):
+    """A simple API endpoint for uploading files
+
+    Args:
+        file (bytes): The file to be uploaded
+
+    Returns:
+        Dict: A dictionary containing the file's size
+    """
+    return {'file_size': len(file)}

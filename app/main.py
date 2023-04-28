@@ -1,11 +1,16 @@
 """The entry point for the application."""
-from fastapi import FastAPI, Path, Body, status
+from fastapi import FastAPI, Path, status
 from pydantic import BaseModel
 
 app = FastAPI()
 
 
 class User(BaseModel):
+    """A class for the users
+
+    Args:
+        BaseModel (Pydantic import): No Idea
+    """
     name: str
     age: int
 
@@ -51,7 +56,9 @@ async def get_user(_id: int = Path(..., ge=1)) -> dict[str: int]:
     name='License Plates',
     description='A simple API endpoint for retrieving license plate data'
 )
-async def get_license_plate(_license: str = Path(..., regex=r"^\w{2}-\d{3}-\w{2}$")) -> dict[str: str]:
+async def get_license_plate(
+    _license: str = Path(..., regex=r"^\w{2}-\d{3}-\w{2}$")
+) -> dict[str: str]:
     """An API endpoint to get license places
 
     Returns:

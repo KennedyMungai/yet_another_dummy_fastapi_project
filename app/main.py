@@ -36,7 +36,7 @@ posts = {
     tags=["Posts"],
     name='Fetch Posts',
     description='This endpoint fetches posts from the database',
-    response_model=Post,
+    response_model=PublicPost,
     status_code=status.HTTP_200_OK
 )
 async def get_post(_id: int) -> dict[int, Post]:

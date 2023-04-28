@@ -1,5 +1,5 @@
 """The entry point for the application."""
-from fastapi import FastAPI
+from fastapi import FastAPI, Path
 
 app = FastAPI()
 
@@ -27,7 +27,7 @@ async def root() -> dict[str, str]:
     description="A simple API endpoint for that emulates the structure of the real thing",
     response_model=dict[str, int]
 )
-async def get_user(_id: int = 0) -> dict[str: int]:
+async def get_user(_id: int = Path(..., ge=1)) -> dict[str: int]:
     """A simple API endpoint for that emulates the structure of the real thing
 
     Args:

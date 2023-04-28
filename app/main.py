@@ -67,7 +67,7 @@ async def get_license_plate(_license: str = Path(..., regex=r"^\w{2}-\d{3}-\w{2}
     description='A simple API endpoint for creating users',
     status_code=status.HTTP_201_CREATED
 )
-async def create_user(_user: User) -> dict[str, int]:
+async def create_user(_user: User) -> User:
     """A simple API endpoint for creating users
 
     Args:
@@ -77,4 +77,4 @@ async def create_user(_user: User) -> dict[str, int]:
     Returns:
         Dict: A dictionary containing the user's name and age
     """
-    return {"name": name, "age": age}
+    return _user

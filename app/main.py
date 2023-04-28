@@ -5,7 +5,7 @@ app = FastAPI()
 
 
 @app.get('/')
-async def root():
+async def root() -> dict[str, str]:
     """The root endpoint for the application
 
     Returns:

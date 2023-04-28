@@ -16,6 +16,15 @@ class Post(BaseModel):
     nb_views: int
 
 
+class PublicPost(BaseModel):
+    """The template for the public Post data
+
+    Args:
+        BaseModel (Pydantic): Base class for Pydantic models
+    """
+    title: str
+
+
 # Dummy Database
 posts = {
     1: Post(title="First Post", nb_views=100),

@@ -1,7 +1,13 @@
 """The entry point for the application."""
 from fastapi import FastAPI, Path, Body, status
+from pydantic import BaseModel
 
 app = FastAPI()
+
+
+class User(BaseModel):
+    name: str
+    age: int
 
 
 @app.get(
@@ -61,7 +67,7 @@ async def get_license_plate(_license: str = Path(..., regex=r"^\w{2}-\d{3}-\w{2}
     description='A simple API endpoint for creating users',
     status_code=status.HTTP_201_CREATED
 )
-async def create_user(name: str = Body(...), age: int = Body(...)) -> dict[str, int]:
+async def create_user(_user: User) -> dict[str, int]:
     """A simple API endpoint for creating users
 
     Args:

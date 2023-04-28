@@ -1,5 +1,5 @@
 """The entry point for the application."""
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Path, Body
 
 app = FastAPI()
 
@@ -45,10 +45,15 @@ async def get_user(_id: int = Path(..., ge=1)) -> dict[str: int]:
     name='License Plates',
     description='A simple API endpoint for retrieving license plate data'
 )
-async def get_license_plate(_license: str = Path(..., min_length=9, max_length=9)) -> dict[str: str]:
+async def get_license_plate(_license: str = Path(..., regex=r"^\w{2}-\d{3}-\w{2}$")) -> dict[str: str]:
     """An API endpoint to get license places
 
     Returns:
         dict: Some simple placeholder text
     """
     return {'license': _license}
+
+
+@app.post('/users', tags=['Users'], name='Create User', description='A simple API endpoint for creating users')
+async def create_user(name: str = Body(...), age: int = Body(...)):
+    return {"name": name, "age": age}

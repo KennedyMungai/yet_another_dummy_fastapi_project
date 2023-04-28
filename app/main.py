@@ -54,7 +54,12 @@ async def get_license_plate(_license: str = Path(..., regex=r"^\w{2}-\d{3}-\w{2}
     return {'license': _license}
 
 
-@app.post('/users', tags=['Users'], name='Create User', description='A simple API endpoint for creating users')
+@app.post(
+    '/users',
+    tags=['Users'],
+    name='Create User',
+    description='A simple API endpoint for creating users'
+)
 async def create_user(name: str = Body(...), age: int = Body(...)):
     """A simple API endpoint for creating users
 

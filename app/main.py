@@ -1,5 +1,5 @@
 """The entry point for the application."""
-from fastapi import FastAPI, Path, status
+from fastapi import FastAPI, Path, status, Form
 from pydantic import BaseModel
 
 app = FastAPI()
@@ -85,3 +85,26 @@ async def create_user(_user: User) -> User:
         Dict: A dictionary containing the user's name and age
     """
     return _user
+
+
+@app.post(
+    '/create-user-post',
+    tags=['Users'],
+    name='Create User Post',
+    status_code=status.HTTP_201_CREATED,
+    description='A simple API endpoint for creating users using form data'
+)
+async def create_user_form(
+    _name: str = Form(...),
+    _age: int = Form(...)
+) -> dict[str: str]:
+    """A simple API endpoint for creating users using form data
+
+    Args:
+        name (str): The name of the user
+        age (int): The age of the user
+
+    Returns:
+        Dict: A dictionary containing the user's name and age
+    """
+    return {'name': _name, 'age': _age}

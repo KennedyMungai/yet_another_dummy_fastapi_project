@@ -1,6 +1,8 @@
 """The entry point for the application."""
 from fastapi import FastAPI, Path, status, Form, File, UploadFile
 from pydantic import BaseModel
+from typing import List
+
 
 app = FastAPI()
 
@@ -148,4 +150,14 @@ async def upload_file_alternative(file: UploadFile = File(...)):
     return {'file_name': file.filename, 'content_type': file.content_type}
 
 
-# @app.post('upload-many-files')
+@app.post('upload-many-files', tags=['File Upload'], name='Multiple Uploads', description='An endpoint to upload a bunch of files', status_code=status.HTTP_201_CREATED)
+async def upload_many_files(_files: List[UploadFile] = File(...)):
+    """An endpoint to upload a bunch of files to the database
+
+    Args:
+        files (list[UploadFile], optional): Uploads a bunch of files. Defaults to File(...).
+    """
+    return [
+        for file in files:
+            {"file_name": file.filename, "content_type": file.content_type}
+    ]

@@ -110,7 +110,13 @@ async def create_user_form(
     return {'name': _name, 'age': _age}
 
 
-@app.post('/files')
+@app.post(
+    '/files',
+    tags=['File Upload'],
+    name='A simple endpoint for uploading files',
+    description='A simple file uploading endpoint',
+    status_code=status.HTTP_201_CREATED
+)
 async def upload_file(file: bytes = File(...)):
     """A simple API endpoint for uploading files
 
@@ -123,7 +129,13 @@ async def upload_file(file: bytes = File(...)):
     return {'file_size': len(file)}
 
 
-@app.post('/upload-file')
+@app.post(
+    '/upload-file',
+    status_code=status.HTTP_201_CREATED,
+    name='Upload A file',
+    description='A better way to upload files',
+    tags=['File Upload']
+)
 async def upload_file_alternative(file: UploadFile = File(...)):
     """A simple API endpoint for uploading files
 
@@ -134,3 +146,6 @@ async def upload_file_alternative(file: UploadFile = File(...)):
         Dict: A dictionary containing the file's size
     """
     return {'file_name': file.filename, 'content_type': file.content_type}
+
+
+# @app.post('upload-many-files')

@@ -1,4 +1,5 @@
 """The entrypoint for the FastAPI application"""
+from os import path
 from fastapi import FastAPI, status, Response
 from pydantic import BaseModel
 
@@ -76,3 +77,16 @@ async def redirect():
         RedirectResponse: A redirect response
     """
     return RedirectResponse('/new-url', status_code=status.HTTP_301_MOVED_PERMANENTLY)
+
+
+@app.get('/cat', tags=['Files'], name='Cat Pic', description='Downloading a cat pic', response_class=FileResponse)
+async def get_cat():
+    """The cat pic download endpoint
+
+    Returns:
+        FileResponse: The file download class
+    """
+    root_directory = path.dirname(path.dirname(__file__))
+    picture_path = path.join(root_directory, 'assets', 'cat.jpg')
+
+    return FileResponse(picture_path)

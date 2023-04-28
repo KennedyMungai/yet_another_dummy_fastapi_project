@@ -66,3 +66,13 @@ async def update_or_create_post(_id: int, _post: Post, _response: Response):
 
     posts[id] = post
     return posts[id]
+
+
+@app.get('/redirect')
+async def redirect():
+    """The redirect endpoint
+
+    Returns:
+        RedirectResponse: A redirect response
+    """
+    return RedirectResponse('/new-url')

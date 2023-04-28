@@ -37,3 +37,18 @@ async def get_user(_id: int = Path(..., ge=1)) -> dict[str: int]:
         Dict: A dictionary containing the user's id
     """
     return {'id': _id}
+
+
+@app.get(
+    '/license-plates/{_license}',
+    tags=['License Plates'],
+    name='License Plates',
+    description='A simple API endpoint for retrieving license plate data'
+)
+async def get_license_plate(_license: str = Path(..., min_length=9, max_length=9)) -> dict[str: str]:
+    """An API endpoint to get license places
+
+    Returns:
+        dict: Some simple placeholder text
+    """
+    return {'license': _license}

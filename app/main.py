@@ -75,4 +75,4 @@ async def redirect():
     Returns:
         RedirectResponse: A redirect response
     """
-    return RedirectResponse('/new-url')
+    return RedirectResponse('/new-url', status_code=status.HTTP_301_MOVED_PERMANENTLY)

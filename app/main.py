@@ -51,7 +51,7 @@ async def get_post(_id: int) -> dict[int, Post]:
 
 @app.put('/posts/{id: int}')
 async def update_or_create_post(_id: int, _post: Post, _response: Response):
-    """The createing ir updateing posts endpoint
+    """The creating ir updating posts endpoint
 
     Args:
         _id (int): The id of the post

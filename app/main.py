@@ -20,7 +20,7 @@ async def pagination(skip: int = 0, limit: int = 0) -> Tuple[int, int]:
 
 
 @app.get('/items')
-async def list_items(p: Tuple[int, int] = Depends(pagination)):
+async def list_items(_p: Tuple[int, int] = Depends(pagination)):
     """A simple function that lists items
 
     Args:
@@ -29,5 +29,5 @@ async def list_items(p: Tuple[int, int] = Depends(pagination)):
     Returns:
         dict: A dictionary of two integers
     """
-    skip, limit = p
+    skip, limit = _p
     return {"skip": skip, "limit": limit}

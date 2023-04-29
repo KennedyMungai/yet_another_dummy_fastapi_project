@@ -15,3 +15,16 @@ class Gender(str, Enum):
     MALE = "MALE"
     FEMALE = "FEMALE"
     NON_BINARY = "NON_BINARY"
+
+
+class Person(BaseModel):
+    """The Person model
+
+    Args:
+        BaseModel (Pydantic): The base class for all pydantic models
+    """
+    first_name: str
+    last_name: str
+    gender: Gender
+    birthdate: date
+    interests: List[str]
